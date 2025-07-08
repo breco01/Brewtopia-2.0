@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Actions\Auth\UpdateLastLoginAt;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -28,6 +29,9 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        // Sla in wanneer de gebruiker voor het laatst is ingelogd
+        (new UpdateLastLoginAt)->handle();
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
