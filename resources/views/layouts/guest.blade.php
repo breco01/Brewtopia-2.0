@@ -47,5 +47,14 @@
             &copy; {{ now()->year }} Brewtopia. Alle rechten voorbehouden.
         </footer>
     </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const video = document.querySelector("video");
+        if (video) {
+            video.playbackRate = 0.5;
+        }
+    });
+</script>
+
 </body>
 </html>
