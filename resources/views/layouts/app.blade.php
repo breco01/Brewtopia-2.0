@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,14 +15,17 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+
 <body class="font-sans antialiased bg-brew-beige text-brew-text">
     <div class="min-h-screen flex flex-col">
         @include('layouts.navigation')
 
         @if (isset($header))
-            <header class="bg-white dark:bg-gray-800 shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
+            <header class="bg-white dark:bg-brew-beige border-b-2 border-brew-amber">
+                <div class="max-w-7xl mx-auto px-6 py-8 text-center">
+                    <h1 class="text-3xl font-extrabold text-brew-brown dark:text-brew-amber">
+                        {{ $header }}
+                    </h1>
                 </div>
             </header>
         @endif
@@ -35,4 +39,5 @@
         </footer>
     </div>
 </body>
+
 </html>
