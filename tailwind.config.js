@@ -19,8 +19,9 @@ module.exports = {
                     brown: '#5e3a1c',
                     beige: '#f9f7f3',
                     text: '#2d2d2d',
-                    subtitle: '#4a3b31', // nieuw
-
+                    subtitle: '#4a3b31',
+                    red: '#a3332b',
+                    green: '#3a7534',
                 },
             },
         },

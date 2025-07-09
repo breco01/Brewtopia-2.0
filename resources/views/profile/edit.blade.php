@@ -1,28 +1,30 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Profile') }}
+        <h2 class="font-semibold text-xl text-brew-brown dark:text-brew-amber leading-tight">
+            Profielinstellingen
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
+    <div class="py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {{-- Profielinformatie bijwerken --}}
+            <div class="bg-white dark:bg-brew-beige shadow-sm sm:rounded-xl p-6 sm:p-10">
+                <h3 class="text-2xl font-extrabold mb-6 text-brew-brown dark:text-brew-amber">Profielgegevens</h3>
+                @include('profile.partials.update-profile-information-form')
             </div>
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
+            {{-- Wachtwoord bijwerken --}}
+            <div class="bg-white dark:bg-brew-beige shadow-sm sm:rounded-xl p-6 sm:p-10">
+                <h3 class="text-2xl font-extrabold mb-6 text-brew-brown dark:text-brew-amber">Wachtwoord wijzigen</h3>
+                @include('profile.partials.update-password-form')
             </div>
+        </div>
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
+        <div class="mt-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {{-- Account verwijderen --}}
+            <div class="bg-white dark:bg-brew-beige shadow-sm sm:rounded-xl p-6 sm:p-10">
+                <h3 class="text-2xl font-extrabold mb-6 text-brew-brown dark:text-brew-amber">Account verwijderen</h3>
+                @include('profile.partials.delete-user-form')
             </div>
         </div>
     </div>
