@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PublicProfileController;
 
 
 /*
@@ -32,6 +33,8 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/login', [LoginController::class, 'create'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'store'])->middleware('guest');
+
+Route::get('/profiel/{username}', [PublicProfileController::class, 'show'])->name('public.profile');
 
 
 require __DIR__.'/auth.php';

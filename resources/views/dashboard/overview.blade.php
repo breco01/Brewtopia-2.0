@@ -1,5 +1,5 @@
 <div class="bg-white dark:bg-brew-beige rounded-xl p-8 shadow-sm">
-                <h3 class="text-2xl font-extrabold mb-6">Overzicht</h3>
+    <h3 class="text-2xl font-extrabold mb-6">Overzicht</h3>
 
     <div class="space-y-4">
         <div class="flex justify-between items-center">
@@ -21,4 +21,19 @@
             </span>
         </div>
     </div>
+
+    @php
+        $user = Auth::user();
+        $profielVolledig = !empty($user->username) && !empty($user->birthdate) && !empty($user->about) && !empty($user->profile_picture);
+    @endphp
+
+    @if ($profielVolledig)
+        <div class="flex justify-between items-center mt-6">
+            <span class="text-brew-text font-medium">Publiek profiel</span>
+            <a href="{{ route('public.profile', $user->username) }}"
+               class="text-brew-amber hover:text-brew-brown underline">
+                brewtopia.test/profiel/{{ $user->username }}
+            </a>
+        </div>
+    @endif
 </div>
