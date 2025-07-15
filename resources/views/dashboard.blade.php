@@ -33,26 +33,5 @@
             @include('dashboard.latest-articles')
         </div>
     </div>
-    <div class="mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-white dark:bg-brew-beige p-6 rounded shadow text-center">
-            <h3 class="text-lg font-semibold text-brew-brown dark:text-brew-amber mb-2">
-                Jouw publieke profiel
-            </h3>
-
-            @if (Auth::user()->username)
-                <a href="{{ route('public.profile', Auth::user()->username) }}"
-                    class="text-brew-amber hover:text-brew-brown font-medium transition">
-                    {{ url('/profiel/' . Auth::user()->username) }}
-                </a>
-            @else
-                <p class="text-sm text-brew-subtitle dark:text-brew-brown">
-                    Je hebt nog geen gebruikersnaam ingesteld. <br>
-                    <a href="{{ route('profile.edit') }}" class="text-brew-amber hover:text-brew-brown underline">
-                        Klik hier om je profiel aan te vullen
-                    </a>
-                </p>
-            @endif
-        </div>
-
 
 </x-app-layout>
