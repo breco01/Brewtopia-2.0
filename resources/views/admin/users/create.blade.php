@@ -24,7 +24,12 @@
 
                 <div class="mb-4">
                     <label class="block text-brew-text font-medium">Wachtwoord</label>
-                    <input type="password" name="password" required
+                    <input type="password" name="password" required class="w-full rounded border-gray-300 mt-1">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-brew-text font-medium">Bevestig wachtwoord</label>
+                    <input type="password" name="password_confirmation" required
                         class="w-full rounded border-gray-300 mt-1">
                 </div>
 
@@ -36,9 +41,9 @@
                 </div>
 
                 <div class="flex justify-between">
-                    <a href="{{ route('admin.users.index') }}" class="text-brew-amber underline hover:text-brew-brown">Annuleer</a>
-                    <button type="submit"
-                        class="bg-brew-amber text-white px-4 py-2 rounded hover:bg-brew-brown">
+                    <a href="{{ route('admin.users.index') }}"
+                        class="text-brew-amber underline hover:text-brew-brown">Annuleer</a>
+                    <button type="submit" class="bg-brew-amber text-white px-4 py-2 rounded hover:bg-brew-brown">
                         Opslaan
                     </button>
                 </div>

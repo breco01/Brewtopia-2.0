@@ -39,7 +39,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::get('/faq', [FaqManagementController::class, 'index'])->name('faq.index');
     Route::get('/contactformulieren', [ContactFormController::class, 'index'])->name('contact.index');
 
-    Route::patch('/gebruikers/{user}/toggle-admin', [\App\Http\Controllers\Admin\UserManagementController::class, 'toggleAdmin'])->name('users.toggleAdmin');
+    Route::patch('/gebruikers/{user}/toggle-admin', [AdminUserController::class, 'toggleAdmin'])->name('users.toggleAdmin');
 });
 
 // Auth
