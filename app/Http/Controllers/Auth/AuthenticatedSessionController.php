@@ -33,6 +33,12 @@ class AuthenticatedSessionController extends Controller
         // Sla in wanneer de gebruiker voor het laatst is ingelogd
         (new UpdateLastLoginAt)->handle();
 
+        // 🔁 Stuur admin naar admin dashboard, anderen naar user dashboard
+        $user = $request->user();
+        if ($user->is_admin) {
+            return redirect()->route('admin.dashboard');
+        }
+
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
