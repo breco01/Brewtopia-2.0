@@ -7,7 +7,7 @@
 
     <div class="py-10">
         <div class="max-w-4xl mx-auto bg-white dark:bg-brew-beige rounded-xl shadow-sm p-8">
-            <form method="POST" action="{{ route('admin.news.store') }}">
+            <form method="POST" action="{{ route('admin.news.store') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-4">
@@ -20,6 +20,12 @@
                     <label class="block text-brew-text font-medium">Inhoud</label>
                     <textarea name="body" rows="8" required
                         class="w-full rounded border-gray-300 mt-1">{{ old('body') }}</textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-brew-text font-medium">Afbeelding</label>
+                    <input type="file" name="image" accept="image/*"
+                        class="w-full rounded border-gray-300 mt-1">
                 </div>
 
                 <div class="flex justify-between mt-6">
