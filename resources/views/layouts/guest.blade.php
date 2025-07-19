@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +12,11 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
 </head>
+
 <body class="font-sans antialiased text-brew-text">
 
     <!-- 🔁 Achtergrondvideo + donkere overlay -->
@@ -30,10 +35,8 @@
         <header class="px-6 py-4 flex justify-between items-center bg-transparent text-white z-10 relative">
             <h1 class="text-2xl font-bold">Brewtopia</h1>
             <div class="space-x-4">
-                <a href="{{ route('login') }}"
-                   class="hover:text-brew-amber transition font-semibold">Login</a>
-                <a href="{{ route('register') }}"
-                   class="hover:text-brew-amber transition font-semibold">Registreren</a>
+                <a href="{{ route('login') }}" class="hover:text-brew-amber transition font-semibold">Login</a>
+                <a href="{{ route('register') }}" class="hover:text-brew-amber transition font-semibold">Registreren</a>
             </div>
         </header>
 
@@ -48,13 +51,14 @@
         </footer>
     </div>
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const video = document.querySelector("video");
-        if (video) {
-            video.playbackRate = 0.5;
-        }
-    });
-</script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const video = document.querySelector("video");
+            if (video) {
+                video.playbackRate = 0.5;
+            }
+        });
+    </script>
 
 </body>
+
 </html>
