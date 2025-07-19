@@ -69,6 +69,17 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
 
 /*
 |--------------------------------------------------------------------------
+| Publieke Nieuwsweergave
+|--------------------------------------------------------------------------
+*/
+
+use App\Http\Controllers\NewsController;
+
+Route::get('/nieuws', [NewsController::class, 'index'])->name('news.public.index');
+Route::get('/nieuws/{news}', [NewsController::class, 'show'])->name('news.public.show');
+
+/*
+|--------------------------------------------------------------------------
 | Auth scaffolding (Laravel Breeze/Fortify)
 |--------------------------------------------------------------------------
 */

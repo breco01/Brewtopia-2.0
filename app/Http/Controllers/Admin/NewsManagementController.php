@@ -30,13 +30,14 @@ class NewsManagementController extends Controller
         if ($request->hasFile('image')) {
             $filename = time() . '_' . $request->file('image')->getClientOriginalName();
             $request->file('image')->storeAs('public/news', $filename);
-            $validated['image'] = $filename;
+            $validated['image'] = $filename; // Correcte kolomnaam
         }
 
         News::create($validated);
 
         return redirect()->route('admin.news.index')->with('success', 'Artikel toegevoegd.');
     }
+
 
 
     public function edit(News $news)
@@ -55,12 +56,11 @@ class NewsManagementController extends Controller
         if ($request->hasFile('image')) {
             $filename = time() . '_' . $request->file('image')->getClientOriginalName();
             $request->file('image')->storeAs('public/news', $filename);
-            $validated['image'] = $filename;
+            $validated['image'] = $filename; // Correcte kolomnaam
         }
 
         $news->update($validated);
 
         return redirect()->route('admin.news.index')->with('success', 'Artikel bijgewerkt.');
     }
-
 }

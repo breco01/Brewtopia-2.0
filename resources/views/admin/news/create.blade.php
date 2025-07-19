@@ -24,17 +24,14 @@
 
                 <div class="mb-4">
                     <label class="block text-brew-text font-medium">Afbeelding</label>
-                    <input type="file" name="image" accept="image/*"
-                        class="w-full rounded border-gray-300 mt-1">
+                    <input type="file" name="image" accept="image/*" class="w-full rounded border-gray-300 mt-1">
                 </div>
 
                 <div class="flex justify-between mt-6">
-                    <a href="{{ route('admin.news.index') }}"
-                       class="text-brew-amber underline hover:text-brew-brown">
+                    <a href="{{ route('admin.news.index') }}" class="text-brew-amber underline hover:text-brew-brown">
                         Annuleer
                     </a>
-                    <button type="submit"
-                        class="bg-brew-amber text-white px-4 py-2 rounded hover:bg-brew-brown">
+                    <button type="submit" class="bg-brew-amber text-white px-4 py-2 rounded hover:bg-brew-brown">
                         Opslaan
                     </button>
                 </div>
