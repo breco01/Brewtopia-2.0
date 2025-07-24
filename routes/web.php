@@ -8,8 +8,10 @@ use App\Http\Controllers\PublicProfileController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\NewsManagementController;
-use App\Http\Controllers\Admin\FaqManagementController;
+use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\FaqCategoryController;
 use App\Http\Controllers\Admin\ContactFormController;
+use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,7 +63,8 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::resource('news', NewsManagementController::class)->names('news');
 
     // FAQ-beheer
-    Route::get('faq', [FaqManagementController::class, 'index'])->name('faq.index');
+    Route::resource('faq-categories', FaqCategoryController::class)->names('faq-categories');
+    Route::resource('faqs', FaqController::class)->names('faqs');
 
     // Contactformulier-beheer
     Route::get('contactformulieren', [ContactFormController::class, 'index'])->name('contact.index');
@@ -73,10 +76,16 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
 |--------------------------------------------------------------------------
 */
 
-use App\Http\Controllers\NewsController;
-
 Route::get('/nieuws', [NewsController::class, 'index'])->name('news.public.index');
 Route::get('/nieuws/{news}', [NewsController::class, 'show'])->name('news.public.show');
+
+/*
+|--------------------------------------------------------------------------
+| Publieke FAQ-weergave
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/faq', [FaqController::class, 'public'])->name('faq.public');
 
 /*
 |--------------------------------------------------------------------------
@@ -84,4 +93,4 @@ Route::get('/nieuws/{news}', [NewsController::class, 'show'])->name('news.public
 |--------------------------------------------------------------------------
 */
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

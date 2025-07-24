@@ -25,7 +25,7 @@
             <div class="bg-white dark:bg-brew-beige rounded-xl p-8 shadow-sm">
                 <h3 class="text-xl font-bold text-brew-text mb-4">FAQ Beheer</h3>
                 <p class="text-brew-subtitle mb-4">Beheer vragen, antwoorden en categorieën.</p>
-                <a href="{{ route('admin.faq.index') }}" class="text-brew-amber underline hover:text-brew-brown">Naar
+                <a href="{{ route('admin.faqs.index') }}" class="text-brew-amber underline hover:text-brew-brown">Naar
                     FAQ-beheer</a>
             </div>
 
