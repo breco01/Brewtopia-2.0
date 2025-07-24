@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\FaqCategory;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
@@ -85,7 +86,10 @@ Route::get('/nieuws/{news}', [NewsController::class, 'show'])->name('news.public
 |--------------------------------------------------------------------------
 */
 
-Route::get('/faq', [FaqController::class, 'public'])->name('faq.public');
+Route::get('/faq', function () {
+    $categories = FaqCategory::with('faqs')->get();
+    return view('faq.index', compact('categories'));
+})->name('faq.public.index');
 
 /*
 |--------------------------------------------------------------------------

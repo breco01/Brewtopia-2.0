@@ -13,6 +13,12 @@
                     Nieuws
                 </a>
 
+                <a href="{{ route('faq.public.index') }}"
+                    class="text-md font-medium {{ request()->routeIs('faq.public.index') ? 'underline text-brew-amber' : 'text-brew-brown dark:text-brew-amber hover:underline' }}">
+                    FAQ
+                </a>
+
+
             </div>
 
             <!-- Rechterkant: User dropdown -->
