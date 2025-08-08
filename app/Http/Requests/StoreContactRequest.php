@@ -23,11 +23,13 @@ class StoreContactRequest extends FormRequest
      */
     public function rules()
     {
+        $isAuthed = auth()->check();
+
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'subject' => 'nullable|string|max:255',
-            'message' => 'required|string|min:10',
+            'name' => [$isAuthed ? 'nullable' : 'required', 'string', 'max:255'],
+            'email' => [$isAuthed ? 'nullable' : 'required', 'email', 'max:255'],
+            'subject' => ['nullable', 'string', 'max:255'],
+            'message' => ['required', 'string', 'min:10'],
         ];
     }
 }

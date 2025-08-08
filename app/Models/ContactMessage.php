@@ -32,4 +32,14 @@ class ContactMessage extends Model
     {
         return $this->belongsTo(User::class, 'replied_by');
     }
+
+    public function scopeUnreadRepliesFor($query, \App\Models\User $user)
+    {
+        return $query->where(function ($q) use ($user) {
+            $q->where('user_id', $user->id)
+                ->orWhere('email', $user->email);
+        })
+            ->whereNotNull('reply_message')
+            ->where('is_read', false);
+    }
 }

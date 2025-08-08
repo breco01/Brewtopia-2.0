@@ -1,7 +1,7 @@
 <nav class="bg-white dark:bg-brew-beige border-b border-brew-amber shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <!-- Linkerkant: Dashboard titel -->
+            <!-- Linkerkant -->
             <div class="flex items-center space-x-6">
                 <a href="{{ route('dashboard') }}"
                     class="text-xl font-bold text-brew-brown dark:text-brew-amber hover:underline">
@@ -20,17 +20,15 @@
 
                 @auth
                     @php
-                        $hasNewReplies = \App\Models\ContactMessage::where('user_id', auth()->id())
-                            ->whereNotNull('reply_message')
-                            ->where('is_read', false)
-                            ->exists();
+                        $replyCount = \App\Models\ContactMessage::unreadRepliesFor(auth()->user())->count();
                     @endphp
 
                     <a href="{{ route('contact.overzicht') }}"
-                        class="relative text-md font-medium {{ request()->routeIs('contact.*') ? 'underline text-brew-amber' : 'text-brew-brown dark:text-brew-amber hover:underline' }}">
+                        class="relative text-md font-medium {{ request()->routeIs('contact.overzicht') ? 'underline text-brew-amber' : 'text-brew-brown dark:text-brew-amber hover:underline' }}">
                         Contact
-                        @if($hasNewReplies)
-                            <span class="absolute -top-1 -right-3 bg-red-600 text-white text-xs rounded-full px-1">
+                        @if($replyCount > 0)
+                            <span
+                                class="absolute -top-2 -right-3 bg-red-600 text-white text-[10px] leading-none rounded-full px-1.5 py-0.5">
                                 1
                             </span>
                         @endif
@@ -43,6 +41,7 @@
                 @endauth
             </div>
 
+
             <!-- Rechterkant: User dropdown -->
             <div class="flex items-center space-x-4">
                 @auth
@@ -52,8 +51,7 @@
                             {{ Auth::user()->name }}
                             <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
                         </button>
                         <div id="dropdown-menu"

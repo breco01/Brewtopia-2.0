@@ -17,11 +17,12 @@ class ContactController extends Controller
     public function store(StoreContactRequest $request)
     {
         $data = $request->validated();
+        $user = auth()->user();
 
         $message = ContactMessage::create([
-            'user_id' => auth()->id(),
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'user_id' => $user?->id,
+            'name' => $user?->name ?? ($data['name'] ?? null),
+            'email' => $user?->email ?? ($data['email'] ?? null),
             'subject' => $data['subject'] ?? null,
             'message' => $data['message'],
             'ip' => $request->ip(),
@@ -29,23 +30,33 @@ class ContactController extends Controller
         ]);
 
         // Stuur mail naar admin
-        Mail::to(config('mail.admin_address'))->send(new NewContactMessageMail($message));
+        //Mail::to(config('mail.admin_address'))->send(new NewContactMessageMail($message));
 
-        return redirect()->route('contact.create')->with('success', 'Bedankt voor je bericht! We nemen spoedig contact met je op.');
+        return redirect()->route('contact.overzicht')->with('success', 'Bericht verzonden.');
     }
 
     public function overzicht()
     {
-        $messages = ContactMessage::where('user_id', auth()->id())
+        $user = auth()->user();
+
+        $messages = ContactMessage::query()
+            ->where(function ($q) use ($user) {
+                $q->where('user_id', $user->id)
+                    ->orWhere('email', $user->email); // fallback voor oude/guest records
+            })
             ->orderByDesc('created_at')
             ->get();
 
-        // markeer alle als gelezen
-        ContactMessage::where('user_id', auth()->id())
+        // markeer eventuele nieuwe replies gelezen
+        ContactMessage::where(function ($q) use ($user) {
+            $q->where('user_id', $user->id)
+                ->orWhere('email', $user->email);
+        })
             ->whereNotNull('reply_message')
             ->update(['is_read' => true]);
 
         return view('contact.overview', compact('messages'));
     }
+
 
 }
