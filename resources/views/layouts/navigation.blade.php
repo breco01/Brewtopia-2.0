@@ -18,6 +18,10 @@
                     FAQ
                 </a>
 
+                <a href="{{ route('contact.create') }}"
+                    class="text-md font-medium {{ request()->routeIs('contact.*') ? 'underline text-brew-amber' : 'text-brew-brown dark:text-brew-amber hover:underline' }}">
+                    Contact
+                </a>
 
             </div>
 

@@ -70,7 +70,10 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
 
     // Contactformulier-beheer
     Route::get('contactformulieren', [ContactFormController::class, 'index'])->name('contact.index');
+    Route::get('contactformulieren/{message}', [ContactFormController::class, 'show'])->name('contact.show'); // ✅ toegevoegd
+    Route::post('contactformulieren/{message}/reply', [ContactFormController::class, 'reply'])->name('contact.reply'); // ✅ toegevoegd
 });
+
 
 /*
 |--------------------------------------------------------------------------
