@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\NewsManagementController;
 use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\FaqCategoryController;
 use App\Http\Controllers\Admin\ContactFormController;
 use App\Http\Controllers\NewsController;
@@ -90,6 +91,16 @@ Route::get('/faq', function () {
     $categories = FaqCategory::with('faqs')->get();
     return view('faq.index', compact('categories'));
 })->name('faq.public.index');
+
+/*
+|--------------------------------------------------------------------------
+| Publieke Contact-weergave
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
 
 /*
 |--------------------------------------------------------------------------
