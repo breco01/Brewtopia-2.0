@@ -18,11 +18,29 @@
                     FAQ
                 </a>
 
-                <a href="{{ route('contact.create') }}"
-                    class="text-md font-medium {{ request()->routeIs('contact.*') ? 'underline text-brew-amber' : 'text-brew-brown dark:text-brew-amber hover:underline' }}">
-                    Contact
-                </a>
+                @auth
+                    @php
+                        $hasNewReplies = \App\Models\ContactMessage::where('user_id', auth()->id())
+                            ->whereNotNull('reply_message')
+                            ->where('is_read', false)
+                            ->exists();
+                    @endphp
 
+                    <a href="{{ route('contact.overzicht') }}"
+                        class="relative text-md font-medium {{ request()->routeIs('contact.*') ? 'underline text-brew-amber' : 'text-brew-brown dark:text-brew-amber hover:underline' }}">
+                        Contact
+                        @if($hasNewReplies)
+                            <span class="absolute -top-1 -right-3 bg-red-600 text-white text-xs rounded-full px-1">
+                                1
+                            </span>
+                        @endif
+                    </a>
+                @else
+                    <a href="{{ route('contact.create') }}"
+                        class="text-md font-medium {{ request()->routeIs('contact.*') ? 'underline text-brew-amber' : 'text-brew-brown dark:text-brew-amber hover:underline' }}">
+                        Contact
+                    </a>
+                @endauth
             </div>
 
             <!-- Rechterkant: User dropdown -->
@@ -34,7 +52,8 @@
                             {{ Auth::user()->name }}
                             <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
                             </svg>
                         </button>
                         <div id="dropdown-menu"

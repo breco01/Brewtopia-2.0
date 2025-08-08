@@ -49,6 +49,18 @@ Route::middleware(['auth'])->group(function () {
 
 /*
 |--------------------------------------------------------------------------
+| Gebruikers Contactberichten (overzicht + detail)
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth'])->prefix('contact')->name('contact.')->group(function () {
+    Route::get('/overzicht', [ContactController::class, 'overzicht'])->name('overzicht');
+    Route::get('/bericht/{message}', [ContactController::class, 'toon'])->name('toon');
+    Route::post('/bericht/{message}/markeer-gelezen', [ContactController::class, 'markeerAlsGelezen'])->name('gelezen');
+});
+
+/*
+|--------------------------------------------------------------------------
 | Admin Routes
 |--------------------------------------------------------------------------
 */

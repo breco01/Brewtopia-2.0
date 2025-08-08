@@ -33,4 +33,19 @@ class ContactController extends Controller
 
         return redirect()->route('contact.create')->with('success', 'Bedankt voor je bericht! We nemen spoedig contact met je op.');
     }
+
+    public function overzicht()
+    {
+        $messages = ContactMessage::where('user_id', auth()->id())
+            ->orderByDesc('created_at')
+            ->get();
+
+        // markeer alle als gelezen
+        ContactMessage::where('user_id', auth()->id())
+            ->whereNotNull('reply_message')
+            ->update(['is_read' => true]);
+
+        return view('contact.overview', compact('messages'));
+    }
+
 }

@@ -32,9 +32,10 @@ class ContactFormController extends Controller
             'replied_at' => now(),
             'replied_by' => auth()->id(),
             'status' => 'replied',
+            'is_read' => false,
         ]);
 
-        Mail::to($message->email)->send(new ReplyToContactMail($message));
+        //Mail::to($message->email)->send(new ReplyToContactMail($message));
 
         return redirect()->route('admin.contact.index')->with('success', 'Antwoord verzonden.');
     }
