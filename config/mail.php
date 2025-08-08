@@ -116,7 +116,7 @@ return [
     ],
 
 
-        'admin_address' => env('MAIL_ADMIN_ADDRESS', 'brent.cornet@telenet.be'),
+        'admin_address' => env('MAIL_ADMIN_ADDRESS', 'admin@ehb.be'),
 
 
 ];
