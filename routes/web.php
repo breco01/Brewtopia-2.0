@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\ContactFormController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\BeerController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\PublicUsersController; // ✅ toegevoegd
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,9 @@ Route::post('/login', [LoginController::class, 'store'])->middleware('guest');
 
 // Publieke profielpagina
 Route::get('/profiel/{username}', [PublicProfileController::class, 'show'])->name('public.profile');
+
+// Publieke gebruikerslijst (voor navbar "Gebruikers")
+Route::get('/gebruikers', [PublicUsersController::class, 'index'])->name('users.public.index'); // ✅ toegevoegd
 
 /*
 |--------------------------------------------------------------------------
@@ -102,7 +106,6 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::post('contactformulieren/{message}/reply', [ContactFormController::class, 'reply'])->name('contact.reply'); // ✅ toegevoegd
 });
 
-
 /*
 |--------------------------------------------------------------------------
 | Publieke Nieuwsweergave
@@ -131,7 +134,6 @@ Route::get('/faq', function () {
 
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-
 
 /*
 |--------------------------------------------------------------------------

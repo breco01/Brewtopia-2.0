@@ -8,6 +8,16 @@
                     Dashboard
                 </a>
 
+                <a href="{{ route('beers.public.index') }}"
+                    class="text-md font-medium {{ request()->routeIs('beers.public.*') ? 'underline text-brew-amber' : 'text-brew-brown dark:text-brew-amber hover:underline' }}">
+                    Bieren
+                </a>
+
+                <a href="{{ route('users.public.index') }}"
+                    class="text-md font-medium {{ request()->routeIs('users.public.index') ? 'underline text-brew-amber' : 'text-brew-brown dark:text-brew-amber hover:underline' }}">
+                    Gebruikers
+                </a>
+
                 <a href="{{ route('news.public.index') }}"
                     class="text-md font-medium {{ request()->routeIs('news.public.*') ? 'underline text-brew-amber' : 'text-brew-brown dark:text-brew-amber hover:underline' }}">
                     Nieuws
@@ -22,14 +32,13 @@
                     @php
                         $replyCount = \App\Models\ContactMessage::unreadRepliesFor(auth()->user())->count();
                     @endphp
-
                     <a href="{{ route('contact.overzicht') }}"
                         class="relative text-md font-medium {{ request()->routeIs('contact.overzicht') ? 'underline text-brew-amber' : 'text-brew-brown dark:text-brew-amber hover:underline' }}">
                         Contact
                         @if($replyCount > 0)
                             <span
                                 class="absolute -top-2 -right-3 bg-red-600 text-white text-[10px] leading-none rounded-full px-1.5 py-0.5">
-                                1
+                                {{ $replyCount }}
                             </span>
                         @endif
                     </a>
@@ -40,7 +49,6 @@
                     </a>
                 @endauth
             </div>
-
 
             <!-- Rechterkant: User dropdown -->
             <div class="flex items-center space-x-4">
