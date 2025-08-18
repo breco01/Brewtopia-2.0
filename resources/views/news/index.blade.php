@@ -11,8 +11,12 @@
             @forelse ($articles as $article)
                 <div class="bg-white dark:bg-brew-beige rounded-xl overflow-hidden shadow-sm border border-brew-amber">
                     <div class="relative h-56 sm:h-64 md:h-72 lg:h-80 overflow-hidden">
-                        <img src="{{ asset('storage/news/' . $article->image) }}" alt="{{ $article->title }}"
-                            class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                        <img
+                            src="{{ $article->image_url }}"
+                            alt="{{ $article->title }}"
+                            loading="lazy"
+                            class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                        >
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
                             <h3 class="text-2xl sm:text-3xl font-bold text-white p-4">
                                 {{ $article->title }}
@@ -25,10 +29,10 @@
                             Gepubliceerd op {{ $article->created_at->format('d/m/Y') }}
                         </p>
                         <p class="text-brew-text mb-4">
-                            {{ Str::limit(strip_tags($article->content), 200) }}
+                            {{ \Illuminate\Support\Str::limit(strip_tags($article->body), 200) }}
                         </p>
                         <a href="{{ route('news.public.show', $article) }}"
-                            class="inline-block bg-brew-amber text-white px-4 py-2 rounded hover:bg-brew-brown transition">
+                           class="inline-block bg-brew-amber text-white px-4 py-2 rounded hover:bg-brew-brown transition">
                             Lees meer →
                         </a>
                     </div>

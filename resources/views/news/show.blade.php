@@ -7,18 +7,20 @@
 
     <div class="py-10">
         <div class="max-w-4xl mx-auto bg-white dark:bg-brew-beige rounded-xl shadow-sm overflow-hidden">
-            
-            @if ($article->image)
-                <img src="{{ asset('storage/news/' . $article->image) }}"
-                     alt="{{ $article->title }}"
-                     class="w-full h-64 sm:h-80 md:h-96 object-cover">
-            @endif
+
+            {{-- Hero-afbeelding: gebruikt accessor image_url met fallback naar placeholder --}}
+            <img
+                src="{{ $article->image_url }}"
+                alt="{{ $article->title }}"
+                loading="lazy"
+                class="w-full h-64 sm:h-80 md:h-96 object-cover"
+            >
 
             <div class="p-6 sm:p-8">
                 <p class="text-sm text-brew-subtitle mb-2">
                     Gepubliceerd op {{ $article->created_at->format('d/m/Y') }}
                 </p>
-                
+
                 <h1 class="text-3xl font-bold text-brew-brown dark:text-brew-amber mb-6">
                     {{ $article->title }}
                 </h1>
