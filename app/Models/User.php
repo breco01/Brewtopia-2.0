@@ -45,5 +45,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'last_login_at' => 'datetime',
+        'birthdate' => 'date',
     ];
+
+    /**
+     * RELATIONS
+     */
+
+    public function reviews()
+    {
+        return $this->hasMany(\App\Models\Review::class);
+    }
+
+    public function beers()
+    {
+        return $this->belongsToMany(\App\Models\Beer::class, 'reviews')
+            ->withPivot(['rating', 'comment'])
+            ->withTimestamps();
+    }
 }

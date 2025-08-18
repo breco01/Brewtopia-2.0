@@ -9,12 +9,27 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Check of ingelogde gebruiker admin is
+        // Admins gaan naar het admin-dashboard
         if (Auth::user()->is_admin) {
             return redirect()->route('admin.dashboard');
         }
 
-        // Anders toon standaard gebruikersdashboard
-        return view('dashboard');
+        // Data voor het gebruikersdashboard
+        $user = Auth::user()->loadCount('reviews');
+
+        // Laatste review van de gebruiker (incl. bijhorend bier)
+        $lastReview = $user->reviews()
+            ->latest()
+            ->with('beer')
+            ->first();
+
+        // Gemiddelde score die de gebruiker gegeven heeft
+        $avgGiven = round((float) ($user->reviews()->avg('rating') ?? 0), 1);
+
+        return view('dashboard', [
+            'user'       => $user,
+            'lastReview' => $lastReview,
+            'avgGiven'   => $avgGiven,
+        ]);
     }
 }

@@ -14,6 +14,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\FaqCategoryController;
 use App\Http\Controllers\Admin\ContactFormController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\BeerController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +33,17 @@ Route::get('/profiel/{username}', [PublicProfileController::class, 'show'])->nam
 
 /*
 |--------------------------------------------------------------------------
+| Publieke Bieren
+|--------------------------------------------------------------------------
+|
+| Lijst en detail van bieren (publiek zichtbaar)
+|
+*/
+Route::get('/bieren', [BeerController::class, 'index'])->name('beers.public.index');
+Route::get('/bieren/{beer}', [BeerController::class, 'show'])->name('beers.public.show');
+
+/*
+|--------------------------------------------------------------------------
 | Authenticated User Routes
 |--------------------------------------------------------------------------
 */
@@ -45,6 +58,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::post('/bieren/{beer}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::delete('/bieren/{beer}/reviews', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 });
 
 /*
