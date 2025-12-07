@@ -15,7 +15,12 @@
                         + Nieuwe gebruiker
                     </a>
                 </div>
-
+                @if (session('error'))
+                    <div class="mb-4 text-red-700 bg-red-100 p-3 rounded">
+                        {{ session('error') }}
+                    </div>
+                @endif
+         
                 @if (session('success'))
                     <div class="mb-4 text-green-700 bg-green-100 p-3 rounded">
                         {{ session('success') }}

@@ -89,6 +89,14 @@ class AdminUserController extends Controller
 
     public function toggleAdmin(User $user)
     {
+        if($user->id === auth()->id()) {
+            return back()->with('error', 'Je kan je eigen adminrechten niet aanpassen.');
+        }
+
+        if($user->is_admin && User::where('is_admin', true)->count() === 1) {
+            return back()->with('error', 'Je kan de laatste adminrechten niet verwijderen.');
+        }
+
         $user->is_admin = !$user->is_admin;
         $user->save();
 
