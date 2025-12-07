@@ -133,7 +133,9 @@ Route::get('/faq', function () {
 */
 
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::post('/contact', [ContactController::class, 'store'])
+    ->middleware('throttle:5,1') // Max of 5 contact form submissions per minute per IP
+    ->name('contact.store');
 
 /*
 |--------------------------------------------------------------------------
