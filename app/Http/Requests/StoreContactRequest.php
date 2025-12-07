@@ -28,8 +28,8 @@ class StoreContactRequest extends FormRequest
         return [
             'name' => [$isAuthed ? 'nullable' : 'required', 'string', 'max:255'],
             'email' => [$isAuthed ? 'nullable' : 'required', 'email', 'max:255'],
-            'subject' => ['nullable', 'string', 'max:255'],
-            'message' => ['required', 'string', 'min:10'],
+            'subject' => ['nullable', 'string', 'min:3', 'max:255'],
+            'message' => ['required', 'string', 'min:20', 'max:2000'],
         ];
     }
 }
