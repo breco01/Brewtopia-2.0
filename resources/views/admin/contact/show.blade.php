@@ -28,12 +28,27 @@
                 <div>
                     <h3 class="text-lg font-bold mb-2 text-gray-800">Antwoord</h3>
 
+                    @if ($errors->any())
+                        <div class="mb-4 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+                            <p class="font-semibold mb-1">Er trad een fout op bij het verzenden van het antwoord:</p>
+                            <ul class="list-disc list-inside">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <form action="{{ route('admin.contact.reply', $message) }}" method="POST" class="space-y-4">
                         @csrf
 
                         <textarea name="reply_message" id="reply_message" rows="6"
                             class="w-full border border-gray-300 rounded-lg p-3 bg-white text-gray-900"
                             placeholder="Typ hier je antwoord...">{{ old('reply_message', $message->reply_message) }}</textarea>
+
+                        @error('reply_message')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
 
                         <div class="flex items-center justify-between">
                             <button type="submit"
