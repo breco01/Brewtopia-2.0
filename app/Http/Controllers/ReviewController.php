@@ -11,7 +11,7 @@ class ReviewController extends Controller
     public function store(Request $request, Beer $beer) {
         $data = $request->validate([
             'rating'  => ['required','numeric','min:0','max:5'],
-            'comment' => ['nullable','string','max:2000'],
+            'comment' => ['nullable','string', 'min:5', 'max:2000'],
         ]);
 
         Review::updateOrCreate(
