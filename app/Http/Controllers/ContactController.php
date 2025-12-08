@@ -6,6 +6,7 @@ use App\Http\Requests\StoreContactRequest;
 use App\Models\ContactMessage;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewContactMessageMail;
+use Illuminate\Support\Facades\Log;
 
 class ContactController extends Controller
 {
@@ -31,6 +32,16 @@ class ContactController extends Controller
 
         // Stuur mail naar admin
         //Mail::to(config('mail.admin_address'))->send(new NewContactMessageMail($message));
+
+        //Security logging
+        Log::info('Contact message submitted', [
+            'event' => 'contact_message_created',
+            'user_id' => $user?->id,
+            'email' => $message->email,
+            'subject' => $message->subject,
+            'ip' => $request->ip(),
+            'user_agent' => $request->userAgent(),
+        ]);
 
         return redirect()->route('contact.overzicht')->with('success', 'Bericht verzonden.');
     }
